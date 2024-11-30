@@ -1,0 +1,17 @@
+.slidev-layout.default {
+  @apply m-4;
+}
+
+:root {
+  --slidev-theme-primary: #63abe1;
+  --slidev-code-font-size: 16px;
+  --slidev-code-line-height: 22px;
+}
+
+.slidev-layout a {
+  @apply border-none;
+}
+
+.text-primary {
+  color: var(--slidev-theme-primary) !important;
+}
