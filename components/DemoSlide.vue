@@ -13,11 +13,10 @@
   font-size: 1em;
   line-height: 1.2em;
   border-radius: 7px;
-  position: relative;
   box-shadow:
     0 0 0 1px rgba(0, 0, 0, 0.05),
     0 0 30px 1px rgba(0, 0, 0, 0.15);
-  @apply mt-4 overflow-hidden;
+  @apply mt-4 overflow-hidden fixed right-4 bottom-4  w-160 h-90;
 }
 
 .dark .slide {

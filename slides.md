@@ -1,5 +1,7 @@
 ---
 theme: seriph
+addons:
+  - python-runner
 background: https://cover.sli.dev
 title: Welcome to Slidev
 info: |
@@ -15,21 +17,15 @@ colorSchema: dark
 
 Presentation slides for developers
 
-<div class="pt-12">
-  <span @click="$slidev.nav.next" class="px-2 py-1 rounded cursor-pointer" flex="~ justify-center items-center gap-2" hover="bg-white bg-opacity-10">
-    Press Space for next page <div class="i-carbon:arrow-right inline-block"/>
-  </span>
-</div>
-
-<div class="abs-br m-6 flex gap-2">
-  <button @click="$slidev.nav.openInEditor()" title="Open in Editor" class="text-xl slidev-icon-btn opacity-50 !border-none !hover:text-white">
-    <div class="i-carbon:edit" />
-  </button>
-  <a href="https://github.com/slidevjs/slidev" target="_blank" alt="GitHub" title="Open in GitHub"
-    class="text-xl slidev-icon-btn opacity-50 !border-none !hover:text-white">
-    <carbon-logo-github />
+<div abs-br m-6 text-xl>
+  <a href="https://github.com/slidevjs/slidev" target="_blank" class="slidev-icon-btn !border-none">
+    <carbon:logo-github />
   </a>
 </div>
+
+<!-- to preload the modules -->
+<Demo hidden />
+
 
 ---
 transition: fade-out
@@ -73,62 +69,47 @@ Yet Another
 # Slides Maker?
 
 ---
+layout: none
+zoom: 0.8
+preload: false
+---
 
-<div grid grid-cols-2 gap-4 h-full>
-<div>
-
-## Basic slides things
-
-```md
-# Hello, Slidev
-
-- Bullet 1
-- Bullet 2
+<Demo />
 
 ---
 
-# Slide 2
+# Math?
 
-<img src="https://sli.dev/logo-title.png" w-20 />
+<div />
+
+$$
+\begin{aligned}
+\nabla \cdot \vec{E} &= \frac{\rho}{\varepsilon_0} \\
+\nabla \cdot \vec{B} &= 0 \\
+\nabla \times \vec{E} &= -\frac{\partial\vec{B}}{\partial t} \\
+\nabla \times \vec{B} &= \mu_0\vec{J} + \mu_0\varepsilon_0\frac{\partial\vec{E}}{\partial t}
+\end{aligned}
+$$
+
+---
+
+# Graph?
+
+<div />
+
+```mermaid
+graph LR
+  A[Start] --> B{Is it working?}
+  B -- Yes --> C[Continue]
+  B -- No --> D[Fix it]
+  D --> B
 ```
-
-</div>
-<div h-full grid grid-rows-2>
-
-<SlideContainer w-full>
-<DemoSlide>
-<Cover>
-  <h1>Hello, Slidev</h1>
-  <ul>
-    <li>Bullet 1</li>
-    <li>Bullet 2</li>
-  </ul>
-</Cover>
-</DemoSlide>
-</SlideContainer>
-
-<SlideContainer>
-<DemoSlide>
-<Default>
-  <h1>Slide 2</h1>
-  <img src="https://sli.dev/logo-title.png" w-64 />
-</Default>
-</DemoSlide>
-</SlideContainer>
-
-</div>
-</div>
-
-<script setup>
-import Cover from '@slidev/client/layouts/cover.vue'
-import Default from '@slidev/client/layouts/default.vue'
-</script>
 
 ---
 clicks: 3
 ---
 
-## Code? <span v-click="2"> Even editable! </span>
+# Code? <span v-click="2"> Even editable! </span>
 
 <div v-show="$clicks < 2">
 
@@ -178,7 +159,7 @@ int main() {
 
 ---
 
-## Interactivity?
+# Interactivity?
 
 <Connections class="mt-4"/>
 
@@ -188,19 +169,7 @@ int main() {
 
 ---
 
-## Animation?
-
-```html
-<div
-  v-motion
-  :initial="{ x: -80 }"
-  :enter="{ x: 0 }"
-  :click-3="{ x: 80 }"
-  :leave="{ x: 1000 }"
->
-  Slidev
-</div>
-```
+# Animation?
 
 <div class="w-60 relative">
   <div class="relative w-40 h-40">
@@ -254,6 +223,28 @@ const final = {
   }
 }
 </script>
+
+---
+
+# Open Source & Free!
+
+<div />
+
+#### 假设：
+
+- 学生 (USTC)
+- 没有/几乎没有 JavaScript / HTML / CSS 经验
+
+<div h-2 />
+
+#### 目标：
+
+- 对于学术幻灯片，提高制作效率：
+    - 学术幻灯片只需要排版和代码展示，基于文本的方式最为高效
+    - 专注于文本内容，自带优雅的样式
+- 使你的幻灯片更吸引人
+    - 制作可交互的幻灯片
+    - Slidev is Hackable
 
 
 ---
@@ -401,11 +392,11 @@ npm run dev
     - 左右键：上一张/下一张
     - 左下方导航栏
 
-- 全屏播放
+- 全屏播放 <carbon-maximize />
 
-- 演讲者模式
+- 演讲者模式 <carbon-user-speaker />
 
-- 幻灯片列表
+- 幻灯片列表 <carbon-apps />
 
 ---
 layout: section
@@ -414,12 +405,13 @@ layout: section
 # 语法介绍
 
 ---
-layout: two-cols
----
 
 # Markdown
 
 <div />
+
+<div grid grid-cols-2 gap-12>
+<div>
 
 幻灯片的内容使用 Markdown 语法编写
 
@@ -434,9 +426,8 @@ layout: two-cols
 [链接](https://sli.dev)
 ```
 
-::right::
-
-<div p-24>
+</div>
+<div mt-14>
 
 # 标题
 
@@ -448,8 +439,135 @@ layout: two-cols
 [链接](https://sli.dev){.text-blue}
 
 </div>
+</div>
 
 ---
+clicks: 3
+---
+
+# HTML & Vue
+
+<div />
+
+HTML 和 Vue 提供更强大的灵活性
+
+<div grid grid-cols-2 gap-12>
+<div>
+
+```md
+<div style="color: red">
+  Some HTML
+</div>
+<div v-for="i in 3">{{ i }}</div>
+```
+
+</div>
+<div mt-1>
+
+<div style="color: red">
+  Some HTML
+</div>
+
+<div v-for="i in 3">{{ i }}</div>
+
+</div>
+</div>
+
+<div v-click grid grid-cols-4 gap-4 mt-16>
+<div border="2 #74c7ec rounded-xl" bg="#74c7ec op-20" py-2 px-4 min-h-26 max-h-max>
+Markdown <span text-xs op-90>(Standard)</span>
+<div border="2 #e0744c rounded-xl" bg="#e0744c op-20" py-2 px-4 mt-1>
+HTML
+</div>
+</div>
+<div border="2 #42d392 rounded-xl" bg="#42d392 op-20" py-2 px-4 min-h-26 max-h-max>
+Vue
+<div border="2 #e0744c rounded-xl" bg="#e0744c op-20" py-2 px-4 mt-1>
+HTML
+</div>
+</div>
+<div col-span-2 flex gap-4 v-click="2">
+<carbon-arrow-right text-3xl mt-8/>
+<div flex-grow border="2 #2a90b5 rounded-xl" bg="#2a90b5 op-20" py-2 px-4 transition-all duration-500 h-26 :class="$clicks > 2 ? 'h-42' : ''">
+Slidev Syntax
+<div flex children:flex-grow gap-4 children:text-center>
+<div border="2 #74c7ec rounded-xl" bg="#74c7ec op-20" py-2 px-4 mt-1>
+Markdown
+</div>
+<div border="2 #42d392 rounded-xl" bg="#42d392 op-20" py-2 px-4 mt-1>
+Vue
+</div>
+<div border="2 #e0744c rounded-xl" bg="#e0744c op-20" py-2 px-4 mt-1>
+HTML
+</div>
+</div>
+<div border="2 #aaaaaa rounded-xl" bg="#aaaaaa op-20" py-2 px-4 mt-4 mb-2 transition forward:delay-200 op-0 :class="$clicks > 2 ? 'op-100' : ''">
+Custom Syntax
+</div>
+</div>
+</div>
+</div>
+
+---
+
+# CSS & UnoCSS
+
+<div />
+
+CSS 和 UnoCSS 提供更多的样式选择
+
+需要一些 CSS 知识，但比 LaTeX 更简单和直观
+
+<div grid grid-cols-2 gap-12>
+<div flex flex-col gap-4>
+
+```md
+<div text-blue> Text color </div>
+
+<div text-2xl> Text size </div>
+
+<div border="1 blue"> Border </div>
+
+<div bg="blue op-40"> Background </div>
+
+<div p-4> Padding </div>
+```
+
+</div>
+
+<div mt-1 flex flex-col gap-6>
+<div text-blue> Text color </div>
+
+<div text-2xl mt--1> Text size </div>
+
+<div border="1 blue"> Border </div>
+
+<div bg="blue op-40"> Background </div>
+
+<div p-4> Padding </div>
+
+</div>
+</div>
+
+---
+
+
+```md {hide|all}
+<div grid grid-cols-2>
+<div> Column 1 <br> Content </div>
+<div> Column 2 </div>
+</div>
+```
+
+
+<div v-click="1" grid grid-cols-2>
+<div> Column 1 <br> Content </div>
+<div> Column 2 <br> Content </div>
+</div>
+
+
+---
+
 
 # 分隔幻灯片
 
@@ -523,7 +641,49 @@ layout: intro
 </div>
 
 ---
-layout: two-cols
+
+# 数学公式
+
+<div />
+
+<div grid grid-cols-2 gap-12>
+<div>
+
+
+```md
+  行内公式：$1 + 1 = \textcircled{9}$
+
+
+  多行公式：
+  $$ {all|1|2}
+  \begin{aligned}
+  a x^2 + b x + c &= 0 \\
+  x &= \frac{-b \pm \sqrt{b^2 - 4ac}}
+            {2a}
+  \end{aligned}
+  $$
+```
+
+</div>
+<div>
+
+
+行内公式：$1 + 1 = \textcircled{9}$
+
+<div h-2 />
+
+多行公式：
+$$ {all|1|2}
+\begin{aligned}
+a x^2 + b x + c &= 0 \\
+x &= \frac{-b \pm \sqrt{b^2 - 4ac}}{2a}
+\end{aligned}
+$$
+
+</div>
+</div>
+
+
 ---
 
 # 代码块
@@ -532,15 +692,25 @@ layout: two-cols
 
 朴实无华的代码块，语法和 Markdown 相同
 
+<div grid grid-cols-2 gap-12>
+
 ````md
   ```js
   console.log('Hello, Slidev!')
   ```
 ````
 
-<div v-click>
+```js
+console.log('Hello, Slidev!')
+```
+
+</div>
+
+<div>
 
 带有动态突出显示的代码块
+
+<div grid grid-cols-2 gap-12>
 
 ````md
   ```js {1-2|3|4}
@@ -551,20 +721,6 @@ layout: two-cols
   ```
 ````
 
-</div>
-
-::right::
-
-<div pt-24 pl-10>
-
-```js
-console.log('Hello, Slidev!')
-```
-
-</div>
-
-<div v-click="1" pt-24 pl-10>
-
 ```js {1-2|3|4}
 const a = 2;
 const b = 3;
@@ -573,18 +729,260 @@ console.log(c);
 ```
 
 </div>
+</div>
 
 ---
 
 # 代码编辑器
 
+<div grid grid-cols-2 gap-4 mb-4>
+
+````md
+  ```js {monaco}
+  console.log('Hello, Slidev!')
+  ```
+````
+
+```js {monaco}
+console.log('Hello, Slidev!')
+```
+
+</div>
+
 # 交互式运行
+
+<div grid grid-cols-2 gap-4>
+
+````md
+  ```py {monaco-run}
+  import pandas as pd
+  from termcolor import colored
+
+  print(colored("Slidev", "blue"))
+  df = pd.DataFrame({
+    'a': [1, 2],
+    'b': [3, 4]
+  })
+  print(df)
+  ```
+````
+
+```python {monaco-run}
+import pandas as pd
+from termcolor import colored
+
+print(colored("Slidev", "blue"))
+df = pd.DataFrame({
+  'a': [1, 2],
+  'b': [3, 4]
+})
+print(df)
+```
+
+</div>
+
+---
+
+# 点击动画
+
+我也不知道为什么叫 “点击动画”，其实就是一步一步的动画意思
+
+<div grid grid-cols-2 gap-12 mb-6>
+
+```md
+<div> 1 + 1 = ? </div>
+<div v-click> ⑨ ? </div>
+<div v-click> No! </div>
+<div v-after> It's 2. </div>
+```
+
+<div>
+
+<div> 1 + 1 = ? </div>
+<div v-click> ⑨ ? </div>
+<div v-click> No! </div>
+<div v-after> It's 2. </div>
+
+</div>
+</div>
+
+<div v-click>
+
+- `v-click`: 下一步才显示
+- `v-after`: 和上一个 `v-click` 或 `v-after` 同时显示
+
+</div>
+
+---
+
+# 列表动画
+
+对于列表和表格，写一堆 `v-click` 也太麻烦了
+
+<div grid grid-cols-2 gap-12 mt--2>
+
+```md
+<v-clicks>
+
+- Option 1
+- Option 2
+- Option 3
+
+</v-clicks>
+
+<v-clicks>
+
+| ID | Data |
+| -- | ---- |
+| 1  | A    |
+| 2  | B    |
+
+</v-clicks>
+```
+
+<div>
+
+<v-clicks>
+
+- Option 1
+- Option 2
+- Option 3
+
+</v-clicks>
+
+<div h-26 />
+
+<v-clicks>
+
+| ID | Data |
+| -- | ---- |
+| 1  | A    |
+| 2  | B    |
+
+</v-clicks>
+
+</div>
+</div>
+
+---
+clicks: 3
+---
+
+# 不按顺序的动画
+
+这也是一种常见的情况
+
+<div grid grid-cols-2 mt--2>
+
+```md
+<div v-click="2"> Third  </div>
+<div v-click="0"> First  </div>
+<div v-click="1"> Second </div>
+```
+
+<div pt-2 pl-12>
+
+<div v-click="2"> Third  </div>
+<div v-click="0"> First  </div>
+<div v-click="1"> Second </div>
+
+</div>
+</div>
+
+<div h-8 />
+
+# 编程式的动画
+
+<div grid grid-cols-2 mt--2>
+
+```vue
+<div :class="{'text-red': $clicks > 2}">
+  will change color
+</div>
+```
+
+<div pt-2 pl-12>
+
+<div :class="{'text-red': $clicks > 2}">
+  will change color
+</div>
+
+</div>
+</div>
+
+在 frontmatter 使用 `clicks: 3` 来控制动画步骤总数
+
+---
+transition: view-transition
+---
+
+# 其他很强大的动画类型
+
+<div />
+
+- Slide transition
+
+- <span view-transition-title> CSS view transition </span>
+
+- CSS transition property
+
+- Motion
+
+---
+transition: view-transition
+---
+
+# <span view-transition-title> View Transition </span>
+
+很酷，对吧
+
+```md
+---
+transition: view-transition
+---
+
+# 其他很强大的动画类型
+
+- <span view-transition-title> CSS view transition </span>
+
+---
+transition: view-transition
+---
+
+# <span view-transition-title> View Transition </span>
+```
 
 ---
 layout: section
 ---
 
-# 导出和部署
+# 一些技巧
+
+---
+
+# 演示
+
+- Option 1: **投屏 / HDMI**
+    - 我的首选
+
+- Option 2: **局域网**
+    - 你的电脑启动 `npm run dev --remote`，目标设备访问该地址
+    - 不同设备，演讲者可以看演讲者视图，进度和绘图同步
+    - 科大好像不支持
+
+- Option 3: **导出到 PPTX / PDF**
+    - 丧失交互性
+    - 不得已的选择
+
+- Option 4: **部署到 GitHub Pages 等**
+    - 任何时候都可以访问
+    - 无法同步进度和绘图
+
+<style>
+li p {
+  @apply mb-0 mt-1;
+}
+</style>
 
 ---
 
@@ -596,29 +994,74 @@ npm run export --format pptx
 npm run export --format png
 ```
 
+会有提示要求你安装 Playwright，可能面临网络问题
+
+PPTX 是一堆图片
+
+导出有很多有用的选项，参见我们的文档
+
 ---
 
 # 部署
 
-GitHub Pages
+<div />
 
----
-layout: section
----
+编译成静态网站：
 
-# 一些技巧
+```bash
+npm run build
+npm run build --base /folder/
+```
 
----
+生成的代码在 `dist` 目录下
 
-# 同步
+或者，使用托管服务，解放双手
+
+- GitHub Pages / Netlify / Vercel
+
+Slidev 官网有指南，非常方便
 
 ---
 
 # AI
 
-Bolt.new
+<div />
 
-Copilot
+<div grid grid-cols-2 gap-4 mb-12>
+<div>
+
+- Bolt.new (有专门的 Slidev 选项)
+
+<video src="./assets/boltnew.mp4" autoplay loop muted w-100 mt-4 float-right />
+
+</div>
+<div>
+
+- GitHub Copilot / Cursor / ...
+
+![](./assets/copilot.png){.w-100.text-right.mt-4}
+
+</div>
+</div>
+
+---
+
+# 网络问题
+
+<div />
+
+- 代理
+- 换源
+- LUG 提供 NPM 源有点不现实
+- PNPM
+
+---
+
+# 更多功能，参见文档 <span ml-6 text-white class="font-[Consolas]"> https://cn.sli.dev </span>
+
+<div h-4 />
+
+<iframe src="https://cn.sli.dev/features/" class="origin-left-top w-150% scale-67"  h-160 />
 
 ---
 
@@ -626,13 +1069,22 @@ Copilot
 
 欢迎提 issue 和问题，也欢迎 PR
 
-<carbon-logo-github /> **GitHub**: https://github.com/slidevjs/slidev <div h-2/>
-
-<carbon-logo-discord /> **Discord**: https://chat.sli.dev <div h-2/>
-
-<cib-tencent-qq /> **QQ Group**: 978643067
+- <carbon-earth-europe-africa-filled /> Website: https://sli.dev <div h-2/>
+- <carbon-logo-github /> GitHub: https://github.com/slidevjs/slidev <div h-2/>
+- <carbon-logo-discord /> Discord: https://chat.sli.dev <div h-2/>
+- <cib-tencent-qq /> QQ Group: <span font-mono text-blue2>978643067</span>
 
 <img src="./assets/qqgroup.jpg" rounded-xl v-drag="[607,100,305,NaN]" />
+
+<style>
+a {
+  @apply font-[Consolas] text-blue2;
+}
+
+li {
+  @apply leading-10 text-xl;
+}
+</style>
 
 ---
 layout: section
@@ -654,7 +1106,7 @@ layout: section
 
 - 做慈善？/ 另一种商业模式？/ 好玩？ / 刷履历？
 
-- <span text-2xl> **开源是一种礼物** </span>
+- <span text-2xl> **开源是一种礼物<br/>互惠不是目的** </span>
 
 </v-clicks>
 

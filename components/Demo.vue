@@ -5,7 +5,6 @@ import Default from '@slidev/client/layouts/default.vue'
 import { parseSync } from '@slidev/parser'
 import Cover from '@slidev/theme-default/layouts/cover.vue'
 import Markdown from 'markdown-it'
-// @ts-expect-error
 import TypeIt from 'typeit'
 import { onMounted, ref, watch } from 'vue'
 import DemoEditor from './DemoEditor.vue'
@@ -68,6 +67,7 @@ if (typeof window !== 'undefined') {
 }
 
 function play() {
+  const S = 1.2
   code.value = ''
   block.value!.innerHTML = ''
   completed.value = false
@@ -82,8 +82,8 @@ function play() {
       setTimeout(() => completed.value = true, 300)
     },
   })
-    .type('<br><span class="token title"># Welcome to Slidev!</span><br><br>', { delay: 400 })
-    .type('Presentation Slides for Developers', { delay: 400 })
+    .type('<br><span class="token title"># Welcome to Slidev!</span><br><br>', { delay: 400/S })
+    .type('Presentation Slides for Developers', { delay: 400/S })
     .move(null, { to: 'START', speed: 0 })
     .type('<br>')
     .move(null, { to: 'START' })
@@ -94,25 +94,25 @@ function play() {
     .exec(resume)
     .pause(1000)
     .exec(pause)
-    .delete(6, { delay: 100, speed: 50 })
+    .delete(6, { delay: 100/S, speed: 50*S })
     .type('cover')
     .exec(resume)
     .exec(pause)
     .pause(1000)
     .type('<br>')
-    .type('<span class="token tag">background:</span> ', { delay: 200 })
-    .type(COVER_URL, { speed: 0 })
+    .type('<span class="token tag">background:</span> ', { delay: 200/S })
+    .type(COVER_URL, { speed: 0*S })
     .exec(resume)
     .pause(1000)
-    .move(null, { to: 'END', speed: 0 })
+    .move(null, { to: 'END', speed: 0*S })
     .exec(pause)
-    .type('<br><br><span class="token punctuation">---</span><br><br>', { delay: 400 })
+    .type('<br><br><span class="token punctuation">---</span><br><br>', { delay: 400/S })
     .exec(resume)
     .exec(() => setTimeout(() => page.value = 1))
-    .type('<span class="token title"># Page 2</span><br><br>', { delay: 400 })
-    .type('- 📄 Write slides in a single Markdown file<br>', { delay: 800 })
-    .type('- 🌈 Themes, code blocks, interactive components<br>', { delay: 800 })
-    .type('- 😎 Read the docs to learn more!', { delay: 800 })
+    .type('<span class="token title"># Page 2</span><br><br>', { delay: 400/S })
+    .type('- 📄 Write slides in a single Markdown file<br>', { delay: 800/S })
+    .type('- 🌈 Themes, code blocks, interactive components<br>', { delay: 800/S })
+    .type('- 😎 Read the docs to learn more!', { delay: 800/S })
     .exec(() => setTimeout(() => page.value = 0))
     .go()
 }
@@ -121,8 +121,8 @@ onMounted(play)
 </script>
 
 <template>
-  <div grid grid-cols-2>
-    <DemoEditor>
+  <div>
+    <DemoEditor fixed left-4 top-4 w-160 h-90>
       <div class="text-sm opacity-50 text-center">
         ./slides.md
       </div>
@@ -137,8 +137,11 @@ onMounted(play)
     </DemoEditor>
 
     <DemoSlide class="text-left">
-      <div class="flex h-full dark:bg-[#181819] transition-transform transform duration-500" style="width: 200%"
-        :class="page === 1 ? '-translate-x-1/2' : ''">
+      <div
+        class="flex h-full dark:bg-[#181819] transition-transform transform duration-500"
+        style="width: 200%"
+        :class="page === 1 ? '-translate-x-1/2' : ''"
+      >
         <SlideContainer class="w-full h-full">
           <component :is="getLayout(0)" v-bind="getAttrs(0)">
             <div v-html="getHTML(0)" />
@@ -150,7 +153,10 @@ onMounted(play)
           </component>
         </SlideContainer>
       </div>
-      <div class="absolute left-2 bottom-1 flex text-gray-200" opacity="0 hover:100">
+      <div
+        class="absolute left-2 bottom-1 flex text-gray-200"
+        opacity="0 hover:100"
+      >
         <div class="icon-btn" :class="{ disabled: page === 0 }" @click="page = 0">
           <div class="i-carbon:chevron-left" />
         </div>
@@ -166,7 +172,6 @@ onMounted(play)
 .slidev-layout ul {
   padding: 0;
 }
-
 .slidev-layout li {
   line-height: 2.4em;
 }

@@ -17,6 +17,9 @@ importers:
       '@slidev/theme-seriph':
         specifier: latest
         version: 0.25.0
+      slidev-addon-python-runner:
+        specifier: ^0.1.2
+        version: 0.1.2
       vue:
         specifier: ^3.5.13
         version: 3.5.13(typescript@5.6.3)
@@ -25,8 +28,8 @@ importers:
         specifier: ^2.2.278
         version: 2.2.278
       typeit:
-        specifier: ^8.8.7
-        version: 8.8.7
+        specifier: 8.1.0
+        version: 8.1.0
 
 packages:
 
@@ -874,9 +877,6 @@ packages:
 
   '@types/unist@3.0.3':
     resolution: {integrity: sha512-ko/gIFJRv177XgZsZcBwnqJN5x/Gien8qNOn0D5bQU/zAzVf9Zt3BlcUiLqhV9y4ARk0GbT3tnUiPNgnTXzc/Q==}
-
-  '@types/web-animations-js@2.2.16':
-    resolution: {integrity: sha512-ATELeWMFwj8eQiH0KmvsCl1V2lu/qx/CjOBmv4ADSZS5u8r4reMyjCXtxG7khqyiwH3IOMNdrON/Ugn94OUcRA==}
 
   '@types/web-bluetooth@0.0.20':
     resolution: {integrity: sha512-g9gZnnXVq7gM7v3tJCWV/qw7w+KeOlSHAhgF9RytFyifW6AF61hdT2ucrYhPq9hLs5JIryeupHV3qGk95dH9ow==}
@@ -2405,6 +2405,10 @@ packages:
     resolution: {integrity: sha512-uxFIHU0YlHYhDQtV4R9J6a52SLx28BCjT+4ieh7IGbgwVJWO+km431c4yRlREUAsAmt/uMjQUyQHNEPf0M39CA==}
     engines: {node: '>=6'}
 
+  pyodide@0.26.4:
+    resolution: {integrity: sha512-z2CHsjVlhhJi5tYBF0AYAfNEPo3zq/z+xOpFtk1tweJkRaTqU4UK/7pLvo8DBU2VDPH31vB3pSI+8fnoqrVrFg==}
+    engines: {node: '>=18.0.0'}
+
   queue-microtask@1.2.3:
     resolution: {integrity: sha512-NuaNSa6flKT5JaSYQzJok04JzTL1CA6aGhv5rfLW3PgqA+M2ChpZQnAC8h8i4ZFkBS8X5RqkDBHA7r4hej3K9A==}
 
@@ -2563,6 +2567,9 @@ packages:
     resolution: {integrity: sha512-ZA6oR3T/pEyuqwMgAKT0/hAv8oAXckzbkmR0UkUosQ+Mc4RxGoJkRmwHgHufaenlyAgE1Mxgpdcrf75y6XcnDg==}
     engines: {node: '>=14.16'}
 
+  slidev-addon-python-runner@0.1.2:
+    resolution: {integrity: sha512-yG7V8mfiKwnG4EVlUd1NlUEw5Jo3dxq9mF+qGVXTjnA4LhB0zXfDrg2EzH/C+ZPl4ldsFxdpcPaTddyWLp35Sg==}
+
   source-map-js@1.2.1:
     resolution: {integrity: sha512-UXWMKhLOwVKb728IUtQPXxfYU+usdybtUrK/8uGE8CQMvrhOpwvzDBwj0QhSL7MQc7vIsISBG8VQ8+IDQxpfQA==}
     engines: {node: '>=0.10.0'}
@@ -2672,8 +2679,8 @@ packages:
     peerDependencies:
       typescript: '*'
 
-  typeit@8.8.7:
-    resolution: {integrity: sha512-sSVpy+cjeFP6Z+fZqiHzUSShg5yYFeJEt/Qut/bX945+Axyq+Yq+GPOuuk+sofoccSv8nNX/ibOOHkbki2mEpg==}
+  typeit@8.1.0:
+    resolution: {integrity: sha512-cbDoGmPJQLqiDfAjan1DouphW1KBYRWrgNKkyctg9CRHK0sMN7wL9Sg9ctCrSnimJoVmM/QDxlsnonjxaEGUUg==}
 
   typescript@5.6.3:
     resolution: {integrity: sha512-hjcS1mhfuyi4WW8IWtjP7brDrG2cuDZukyrYrSauoXGNgx0S7zceP07adYkJycEr56BOUTNPzbInooiN3fn1qw==}
@@ -2962,6 +2969,18 @@ packages:
   wrap-ansi@7.0.0:
     resolution: {integrity: sha512-YVGIj2kamLSTxw6NsZjoBxfSwsn0ycdesmc4p+Q21c5zPuZ1pl+NfxVdxPtdHvmNVOQ6XSYG4AUtyt/Fi7D16Q==}
     engines: {node: '>=10'}
+
+  ws@8.18.0:
+    resolution: {integrity: sha512-8VbfWfHLbbwu3+N6OKsOMpBdT4kXPDDB9cJk2bJ6mh9ucxdlnNvH1e+roYkKmN9Nxw2yjz7VzeO9oOz2zJ04Pw==}
+    engines: {node: '>=10.0.0'}
+    peerDependencies:
+      bufferutil: ^4.0.1
+      utf-8-validate: '>=5.0.2'
+    peerDependenciesMeta:
+      bufferutil:
+        optional: true
+      utf-8-validate:
+        optional: true
 
   y18n@5.0.8:
     resolution: {integrity: sha512-0pfFzegeDWJHJIAmTLRP2DwHjdF5s7jo9tuztdQxAhINCdvS+3nGINqPd00AphqJR/0LhANUS6/+7SCb98YOfA==}
@@ -4015,8 +4034,6 @@ snapshots:
     optional: true
 
   '@types/unist@3.0.3': {}
-
-  '@types/web-animations-js@2.2.16': {}
 
   '@types/web-bluetooth@0.0.20': {}
 
@@ -5911,6 +5928,13 @@ snapshots:
 
   punycode.js@2.3.1: {}
 
+  pyodide@0.26.4:
+    dependencies:
+      ws: 8.18.0
+    transitivePeerDependencies:
+      - bufferutil
+      - utf-8-validate
+
   queue-microtask@1.2.3: {}
 
   queue@6.0.2:
@@ -6075,6 +6099,13 @@ snapshots:
   slash@5.1.0:
     optional: true
 
+  slidev-addon-python-runner@0.1.2:
+    dependencies:
+      pyodide: 0.26.4
+    transitivePeerDependencies:
+      - bufferutil
+      - utf-8-validate
+
   source-map-js@1.2.1: {}
 
   space-separated-tokens@2.0.2: {}
@@ -6191,9 +6222,7 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  typeit@8.8.7:
-    dependencies:
-      '@types/web-animations-js': 2.2.16
+  typeit@8.1.0: {}
 
   typescript@5.6.3: {}
 
@@ -6524,6 +6553,8 @@ snapshots:
       ansi-styles: 4.3.0
       string-width: 4.2.3
       strip-ansi: 6.0.1
+
+  ws@8.18.0: {}
 
   y18n@5.0.8: {}
 
