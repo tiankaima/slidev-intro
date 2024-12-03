@@ -1,3 +1,5 @@
+/// <reference types="vite/client" />
+
 import { useGLTF } from '@tresjs/cientos';
 import type { Scene } from 'three';
 import { Group, Matrix4, Quaternion, Vector3 } from 'three';
@@ -13,9 +15,9 @@ export async function usePyramid(
 ) {
 	// Feature: load models and setup materials
 	const { nodes: tetrahedronNodes, materials: tetrahedronMaterials } =
-		await useGLTF('/tetrahedron.gltf');
+		await useGLTF(import.meta.env.BASE_URL + 'tetrahedron.gltf');
 	const { nodes: octahedronNodes, materials: octahedronMaterials } =
-		await useGLTF('/octahedron.gltf');
+		await useGLTF(import.meta.env.BASE_URL + 'octahedron.gltf');
 
 	Object.values(tetrahedronMaterials).forEach(setupMaterial);
 	Object.values(octahedronMaterials).forEach(setupMaterial);
