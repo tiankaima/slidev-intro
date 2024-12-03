@@ -1,11 +1,7 @@
-# Welcome to [Slidev](https://github.com/slidevjs/slidev)!
+# Introduction to Slidev for LUG@USTC
 
-To start the slide show:
 
-- `npm install`
-- `npm run dev`
-- visit <http://localhost:3030>
 
-Edit the [slides.md](./slides.md) to see the changes.
+## Credit
 
-Learn more about Slidev at the [documentation](https://sli.dev/).
+The Pytamix-related code is copied from https://github.com/alvarosabu/viteconf-pyraminx, under the MIT License.

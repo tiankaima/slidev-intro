@@ -2,20 +2,23 @@
 theme: seriph
 addons:
   - python-runner
-background: https://cover.sli.dev
-title: Welcome to Slidev
+background: https://cdn.jsdelivr.net/gh/USTCdev/slidev-theme-ustc@master/assets/backgrounds/bg3.jpg
+title: Introduction to Slidev
 info: |
-  ## Slidev Starter Template
-  Presentation slides for developers.
+  ## Introduction to Slidev 
 
   Learn more at [Sli.dev](https://sli.dev)
 mdc: true
 colorSchema: dark
 ---
 
-# Welcome to Slidev
+# Introduction to Slidev
 
+<div />
+
+<div op-80>
 Presentation slides for developers
+</div>
 
 <div abs-br m-6 text-xl>
   <a href="https://github.com/slidevjs/slidev" target="_blank" class="slidev-icon-btn !border-none">
@@ -77,12 +80,14 @@ preload: false
 <Demo />
 
 ---
+transition: slide-left
+---
 
 # Math?
 
-<div />
+Supports $\KaTeX$, a subset of $\LaTeX$.
 
-$$
+$$ {1|2|3|4|all}
 \begin{aligned}
 \nabla \cdot \vec{E} &= \frac{\rho}{\varepsilon_0} \\
 \nabla \cdot \vec{B} &= 0 \\
@@ -92,21 +97,41 @@ $$
 $$
 
 ---
+transition: slide-left
+---
 
 # Graph?
 
 <div />
 
+<div grid grid-cols-2 gap-12>
+<div>
+
+````md
+  ```mermaid
+  graph TB
+    A[Start] --> B{Is it working?}
+    B -- Yes --> C[Continue]
+    B -- No --> D[Fix it]
+    D --> B
+  ```
+````
+
+</div>
+
 ```mermaid
-graph LR
+graph TB
   A[Start] --> B{Is it working?}
   B -- Yes --> C[Continue]
   B -- No --> D[Fix it]
   D --> B
 ```
 
+</div>
+
 ---
 clicks: 3
+transition: slide-left
 ---
 
 # Code? <span v-click="2"> Even editable! </span>
@@ -143,20 +168,20 @@ int main() {
 
 <div v-show="$clicks >= 2">
 
-```cpp {monaco}
-#include <iostream>
+```ts {monaco}
+import { ref, watchEffect } from 'vue'
 
-int main() {
-  std::cout << "Hello, Slidev!" << std::endl;
+const a = ref(1)
 
-  for (int i : std::views::iota(0, 10)) {
-    std::cout << i << std::endl;
-  }
-}
+watchEffect(() => {
+  console.log(a.value)
+})
 ```
 
 </div>
 
+---
+transition: slide-left
 ---
 
 # Interactivity?
@@ -168,8 +193,10 @@ int main() {
 <iframe v-click fixed right-10 w-120 h-68 top-30 bottom-0  src="https://www.youtube.com/embed/dQw4w9WgXcQ?si=hCnWGH-S8ML-hjau" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 
 ---
+transition: fade-out
+---
 
-# Animation?
+# Animation & 3D?
 
 <div class="w-60 relative">
   <div class="relative w-40 h-40">
@@ -208,6 +235,17 @@ int main() {
   </div>
 </div>
 
+
+<div v-drag="[474,126,489,410]" v-motion :initial="{opacity: 0}" :enter="{ opacity: 1, transition: { delay: 3000, duration: 2000 } }">
+<TresCanvas v-bind="state">
+  <Scene />
+</TresCanvas>
+<div op-80 abs-br>
+by <span italic>Alvaro Saburido</span>
+</div>
+</div>
+
+
 <!-- vue script setup scripts can be directly used in markdown, and will only affects current page -->
 <script setup lang="ts">
 const final = {
@@ -222,8 +260,23 @@ const final = {
     mass: 2
   }
 }
+
+import { TresCanvas } from '@tresjs/core';
+import { onMounted, reactive, ref } from 'vue';
+import { BasicShadowMap, NoToneMapping, SRGBColorSpace } from 'three';
+import Scene from './components/Scene.vue';
+
+const state = reactive({
+	alpha: true,
+	transparent: true,
+	shadowMapType: BasicShadowMap,
+	outputColorSpace: SRGBColorSpace,
+	toneMapping: NoToneMapping,
+});
 </script>
 
+---
+transition: fade-out
 ---
 
 # Open Source & Free!
@@ -239,16 +292,17 @@ const final = {
 
 #### 目标：
 
-- 对于学术幻灯片，提高制作效率：
+- 对于学术报告，提高制作效率：
     - 学术幻灯片只需要排版和代码展示，基于文本的方式最为高效
     - 专注于文本内容，自带优雅的样式
-- 使你的幻灯片更吸引人
+- 对于演讲，使你的幻灯片更吸引人
     - 制作可交互的幻灯片
-    - Slidev is Hackable
+    - Slidev is Hackable，只有想象力是限制
 
 
 ---
 layout: section
+transition: fade-out
 ---
 
 <h1>
@@ -276,13 +330,13 @@ layout: section
 
 <div />
 
-<div font-bold text-2xl class="font-[Consolas]" border="b dashed" w-min> sli.dev/new </div>
+<div font-bold text-2xl class="font-[Consolas]" border="b dashed" w-min> https://sli.dev/new </div>
 
 <div float-right mt--16>
 
 优点：无需任何配置，只需要浏览器
 
-缺点：速度不如本地环境
+缺点：编辑体验不如本地环境
 
 </div>
 
@@ -298,7 +352,7 @@ layout: section
 
 1. 安装 Node.js
 
-    - 打开 https://nodejs.org/
+    - 打开 <a href="https://nodejs.org/" class="font-[Consolas] text-blue border-b ml-1"> https://nodejs.org/ </a>
     - 点击下载按钮并安装
 
 2. 换源 (可选)
@@ -375,7 +429,7 @@ npm run dev
 
 <div v-click border="2 red rounded" v-drag="[510,283,44,43]" />
 
-<div v-click border="2 yellow rounded" v-drag="[555,22,216,300]" />
+<div v-click border="2 yellow rounded" v-drag="[555,46,216,276]" />
 
 <div v-click border="2 green rounded" v-drag="[555,323,216,214]" />
 
@@ -385,18 +439,46 @@ npm run dev
 
 <div />
 
-- 导航幻灯片：
-  
-    - 左右键：上一步/下一步
-    - 空格：下一步
-    - 左右键：上一张/下一张
-    - 左下方导航栏
+<div grid grid-cols-2 gap-12>
+<div>
 
-- 全屏播放 <carbon-maximize />
+#### 导航栏 {.mb-2}
 
-- 演讲者模式 <carbon-user-speaker />
+- <carbon-maximize /> 全屏播放
+- <carbon-arrow-left /><carbon-arrow-right /> 上一步/下一步
+- <carbon-apps /> 幻灯片列表
+- <carbon-user-avatar /> 打开摄像头
+- <carbon-video /> 录制演讲
+- <carbon-pen /> 绘图
+- <carbon-text-annotation-toggle /> 编辑幻灯片
 
-- 幻灯片列表 <carbon-apps />
+
+</div>
+<div>
+
+#### 快捷键 {.mb-2}
+
+- <carbon-arrow-left /><carbon-arrow-right /><span class="acc-key"> SPACE </span> 上一步/下一步
+- <carbon-arrow-up /><carbon-arrow-down /> 上一张/下一张 <span ml-1 op-80>(跳过动画)</span>
+- <span class="acc-key"> F </span> 全屏
+
+</div>
+</div>
+
+<svg v-drag="[317,275,128,239,12]" op-60 width="275" height="463" viewBox="0 0 275 463" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M134.511 461.181C134.611 462.004 135.359 462.589 136.181 462.489L149.582 460.858C150.405 460.758 150.99 460.01 150.89 459.187C150.79 458.365 150.042 457.78 149.22 457.88L137.308 459.33L135.858 447.418C135.758 446.595 135.01 446.01 134.187 446.11C133.365 446.21 132.78 446.958 132.88 447.78L134.511 461.181ZM1.17697 6.48952C51.5194 0.508233 102.808 3.25775 146.963 16.3754C191.121 29.4936 228.037 52.9439 249.849 88.2878C271.644 123.605 278.503 171.033 262.098 232.425C245.685 293.845 206.001 369.162 134.819 460.075L137.181 461.925C208.499 370.838 248.44 295.155 264.996 233.2C281.559 171.217 274.731 122.895 252.401 86.7122C230.088 50.556 192.442 26.7564 147.818 13.4996C103.192 0.24223 51.4806 -2.50825 0.823027 3.51048L1.17697 6.48952Z" fill="white" stroke-dasharray="4 4" />
+</svg>
+
+<div border="t-2 r-2 dashed white op-60" fixed left-0 bottom-0 w-90 h-10 />
+
+<style>
+.slidev-icon {
+  @apply ml-2 border border-#777 border-rounded border-op-50 p-1 text-2xl mb--1;
+}
+.acc-key {
+  @apply mx-2 border border-#777 border-rounded border-op-50 p-1 text-4 leading-5 mb--1 min-w-7 inline-block text-center;
+}
+</style>
 
 ---
 layout: section
@@ -441,6 +523,12 @@ layout: section
 </div>
 </div>
 
+<style>
+li {
+  @apply !leading-8;
+}
+</style>
+
 ---
 clicks: 3
 ---
@@ -458,7 +546,7 @@ HTML 和 Vue 提供更强大的灵活性
 <div style="color: red">
   Some HTML
 </div>
-<div v-for="i in 3">{{ i }}</div>
+<div v-for="i in 3">{{ 2**i }}</div>
 ```
 
 </div>
@@ -468,7 +556,7 @@ HTML 和 Vue 提供更强大的灵活性
   Some HTML
 </div>
 
-<div v-for="i in 3">{{ i }}</div>
+<div v-for="i in 3">{{ 2**i }}</div>
 
 </div>
 </div>
@@ -510,13 +598,13 @@ Custom Syntax
 
 ---
 
-# CSS & UnoCSS
+# UnoCSS
 
 <div />
 
 CSS 和 UnoCSS 提供更多的样式选择
 
-需要一些 CSS 知识，但比 LaTeX 更简单和直观
+需要一些学习。可能比 LaTeX 更简单和直观
 
 <div grid grid-cols-2 gap-12>
 <div flex flex-col gap-4>
@@ -530,7 +618,7 @@ CSS 和 UnoCSS 提供更多的样式选择
 
 <div bg="blue op-40"> Background </div>
 
-<div p-4> Padding </div>
+<div pl-8> Padding </div>
 ```
 
 </div>
@@ -544,32 +632,125 @@ CSS 和 UnoCSS 提供更多的样式选择
 
 <div bg="blue op-40"> Background </div>
 
-<div p-4> Padding </div>
+<div pl-8> Padding </div>
 
 </div>
 </div>
 
 ---
 
+# 声明式 CSS
 
-```md {hide|all}
-<div grid grid-cols-2>
-<div> Column 1 <br> Content </div>
-<div> Column 2 </div>
+当然，我们也可以使用普通的 CSS
+
+- 全局 CSS: `./style.css`
+- 每个幻灯片的专属 CSS: `style` 标签：
+
+```vue
+# My slide
+
+<style>
+h1 {
+  color: red;
+  // Or: @apply text-red;
+}
+</style>
+
+---
+
+# This won't be red
+```
+
+---
+
+# 常用布局
+
+基于 Web 的幻灯片有更多的布局选择
+
+<div mt--4 />
+
+- Grid：静态分配空间
+
+<div grid grid-cols-2 gap-12>
+
+```md
+<div grid grid-cols-2 gap-4>
+  <div border p-2> Left  </div>
+  <div border p-2> Right </div>
 </div>
 ```
 
-
-<div v-click="1" grid grid-cols-2>
-<div> Column 1 <br> Content </div>
-<div> Column 2 <br> Content </div>
+<div grid grid-cols-2 gap-4 p-2 :className="className">
+<div border p-2> Left  </div>
+<div border p-2> Right </div>
+</div>
 </div>
 
+- Flex：动态分配空间
+
+<div grid grid-cols-2 gap-12>
+
+<div w-100>
+
+```md
+<div flex gap-4>
+  <div border p-2> Item  </div>
+  <div border p-2> Large Item </div>
+  <div border p-2 flex-grow> Rest </div>
+</div>
+```
+
+</div>
+
+<div flex gap-4 p-2 :className="className">
+<div border p-2> Item  </div>
+<div border p-2> Large Item </div>
+<div border p-2 flex-grow> Rest </div>
+</div>
+</div>
+
+<div v-click mt-2 text-xl flex items-bottom>
+<simple-icons-mdnwebdocs text-blue mr-3 /><span>MDN Web Docs</span>
+<a href="https://developer.mozilla.org/zh-CN/" class="font-[Consolas] ml-6 text-lg block mt-0.5 align-bottom"> https://developer.mozilla.org/zh-CN/ </a>
+</div>
+
+<!-- <div grid grid-cols-3>
+<label><input type="checkbox" v-model="item1" :disabled="item1" /><code> items-start </code></label>
+<label><input type="checkbox" v-model="item2" :disabled="item2" /><code> items-center </code></label>
+<label><input type="checkbox" v-model="item3" :disabled="item3" /><code> items-end </code></label>
+<label><input type="checkbox" v-model="justify1" :disabled="justify1" /><code> justify-start </code></label>
+<label><input type="checkbox" v-model="justify2" :disabled="justify2" /><code> justify-center </code></label>
+<label><input type="checkbox" v-model="justify3" :disabled="justify3" /><code> justify-end </code></label>
+</div> -->
+
+<script setup>
+import { ref, computed } from 'vue'
+const items = ref(0)
+const justify = ref(0)
+const item1 = computed({ get: () => items.value == 0, set: () => items.value = 0 })
+const item2 = computed({ get: () => items.value == 1, set: () => items.value = 1 })
+const item3 = computed({ get: () => items.value == 2, set: () => items.value = 2 })
+const justify1 = computed({ get: () => justify.value == 0, set: () => justify.value = 0 })
+const justify2 = computed({ get: () => justify.value == 1, set: () => justify.value = 1 })
+const justify3 = computed({ get: () => justify.value == 2, set: () => justify.value = 2 })
+const className = computed(() => {
+  return [
+    'items-start',
+    'items-center',
+    'items-end',
+  ][items.value] + ' ' + [
+    'justify-start',
+    'justify-center',
+    'justify-end',
+  ][justify.value]
+})
+</script>
 
 ---
 
-
 # 分隔幻灯片
+
+以上是单张幻灯片的编写方式，如何编写多张幻灯片？
 
 ```md
 # 第一页
@@ -593,6 +774,8 @@ CSS 和 UnoCSS 提供更多的样式选择
 
 # 配置幻灯片
 
+为幻灯片添加属性！
+
 ```md
 ---
 theme: seriph
@@ -611,9 +794,9 @@ layout: intro
 # 第三页没有任何配置
 ```
 
-<div v-click rounded-xl border="2 yellow" v-drag="[63,115,221,80]" />
+<div v-click rounded-xl border="2 yellow" v-drag="[61,145,221,80]" />
 
-<div v-after text-yellow v-drag="[301,108,363,NaN]">
+<div v-after text-yellow v-drag="[302,135,363,NaN]">
 
 第一页前的配置是 `Headmatter`
 
@@ -621,10 +804,9 @@ layout: intro
 
 </div>
 
+<div v-click rounded-xl border="2 green" v-drag="[58,289,221,80]" />
 
-<div v-click rounded-xl border="2 green" v-drag="[63,260,221,80]" />
-
-<div v-after text-green v-drag="[301,253,363,NaN]">
+<div v-after text-green v-drag="[299,279,363,NaN]">
 
 其他每页前的配置是 `Frontmatter`
 
@@ -632,9 +814,9 @@ layout: intro
 
 </div>
 
-<div v-click rounded-xl border="2 red" v-drag="[61,400,223,44]" />
+<div v-click rounded-xl border="2 red" v-drag="[59,428,223,44]" />
 
-<div v-after text-red v-drag="[295,392,363,NaN]">
+<div v-after text-red v-drag="[295,421,363,NaN]">
 
 `Headmatter` 和 `Frontmatter` 都是可选的
 
@@ -648,7 +830,6 @@ layout: intro
 
 <div grid grid-cols-2 gap-12>
 <div>
-
 
 ```md
   行内公式：$1 + 1 = \textcircled{9}$
@@ -732,8 +913,10 @@ console.log(c);
 </div>
 
 ---
+class: code-sm
+---
 
-# 代码编辑器
+<!-- # 代码编辑器
 
 <div grid grid-cols-2 gap-4 mb-4>
 
@@ -747,13 +930,21 @@ console.log(c);
 console.log('Hello, Slidev!')
 ```
 
-</div>
+</div> -->
 
-# 交互式运行
+
+# 代码运行器 <span text-lg text-white op-80> 内置 JavaScript & TypeScript, Python 可安装插件 </span>
 
 <div grid grid-cols-2 gap-4>
 
 ````md
+  ---
+  addons:
+    - python-runner
+  ---
+
+  <!-- ... -->
+
   ```py {monaco-run}
   import pandas as pd
   from termcolor import colored
@@ -953,6 +1144,73 @@ transition: view-transition
 ```
 
 ---
+
+# Icons
+
+<div />
+
+<div grid grid-cols-2 gap-12>
+
+```md
+<carbon-logo-github />
+<i i-carbon-chart-column />
+```
+
+<div flex flex-col gap-2 mt-2 text-xl>
+<carbon-logo-github />
+<i i-carbon-chart-column />
+</div>
+</div>
+
+<div class="font-[Consolas]" mt-4> <a href="https://icones.js.org/">https://icones.js.org/</a> </div>
+
+<iframe src="https://icones.js.org/" h-120 mt-2 class="origin-left-top w-150% scale-67" />
+
+---
+dragPos:
+  square: 677,37,167,_,-16
+---
+
+# Draggable Elements
+
+Double-click on the draggable elements to edit their positions.
+
+<br>
+
+###### Directive Usage
+
+```md
+<img v-drag="'square'" src="https://sli.dev/logo.png">
+```
+
+<br>
+
+###### Component Usage
+
+```md
+<v-drag text-3xl>
+  <div class="i-carbon:arrow-up" />
+  Use the `v-drag` component to have a draggable container!
+</v-drag>
+```
+
+<v-drag pos="663,206,261,_,-15">
+  <div text-center text-3xl border border-main rounded>
+    Double-click me!
+  </div>
+</v-drag>
+
+<img v-drag="'square'" src="https://sli.dev/logo.png">
+
+###### Draggable Arrow
+
+```md
+<v-drag-arrow two-way />
+```
+
+<v-drag-arrow pos="630,426,253,46" two-way op70 />
+
+---
 layout: section
 ---
 
@@ -988,6 +1246,8 @@ li p {
 
 # 导出
 
+<div relative v-mark.cross.red>
+
 ```bash
 npm run export --format pdf
 npm run export --format pptx
@@ -999,6 +1259,17 @@ npm run export --format png
 PPTX 是一堆图片
 
 导出有很多有用的选项，参见我们的文档
+
+<div v-click="1" absolute inset-0 bg="#121212 op-80" />
+</div>
+
+<div v-after text-2xl text-center mt-16>
+
+即将推出更易用、更稳定的导出方式，敬请期待！
+
+[(前几天才想到思路，来不及写完了😇)]{.op-90.text-lg}
+
+</div>
 
 ---
 
@@ -1052,8 +1323,24 @@ Slidev 官网有指南，非常方便
 
 - 代理
 - 换源
-- LUG 提供 NPM 源有点不现实
 - PNPM
+- GitHub Codespace
+
+---
+
+# 一些提示
+
+<div />
+
+- PPT 和 Slidev 的适用场景不同，有的时候 PPT 更合适
+- 适用 Slidev 时，先确定是追求效率还是质量
+    - 追求效率：Slidev 里只需要写文本，就可以获得不错的排版
+        - 写好了文章，需要做汇报的情况
+    - 追求质量：编写 CSS 和 Vue，可以做出完美效果，但需要更多时间
+        - 专业演讲，需要更好的效果
+- Slidev 中的高级功能需要一些 JavaScript / CSS 知识，如果没有基础，琢磨起来比较耗时
+  
+  可以在社区里（群里）提问
 
 ---
 
@@ -1104,9 +1391,9 @@ layout: section
 
 - 字面意思：开放源代码
 
-- 做慈善？/ 另一种商业模式？/ 好玩？ / 刷履历？
+- 做慈善？/ 另一种商业模式？/ 玩？
 
-- <span text-2xl> **开源是一种礼物<br/>互惠不是目的** </span>
+- <span text-2xl> **开源是一种礼物<div h-2/>互惠不是目的** </span>
 
 </v-clicks>
 
@@ -1174,7 +1461,7 @@ https://talks.antfu.me/2024/vueconf-shenzhen/3
     - 社区活跃
     - 华人参与度不错
 
-3. 参与开源可能需要一个契机。从你的需求出发，找到一个你感兴趣的项目
+3. 参与开源可能需要一个契机。从你的需求出发，找到一个感兴趣的项目
 
 ---
 

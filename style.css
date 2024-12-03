@@ -1,7 +1,7 @@
-@import './demo.css';
+@import "./demo.css";
 
 .slidev-layout.default {
-  @apply m-4;
+  @apply m-2;
 }
 
 :root {
@@ -10,10 +10,36 @@
   --slidev-code-line-height: 22px;
 }
 
+.slidev-layout.code-sm {
+  --slidev-code-font-size: 12px;
+  --slidev-code-line-height: 20px;
+}
+
 .slidev-layout a {
   @apply border-none;
 }
 
 .text-primary {
   color: var(--slidev-theme-primary) !important;
+}
+
+.mdn-logo {
+  align-items: center;
+  display: flex;
+  width: 160px;
+}
+.mdn-logo svg {
+  height: 1.5rem;
+  margin-top: 0.3rem;
+}
+.mdn-logo .logo-m,
+.mdn-logo .logo-_ {
+  fill: var(--text-link);
+}
+.mdn-logo .logo-text {
+  fill: var(--text-primary);
+}
+
+.slidev-layout kbd {
+  @apply inline-block w-6 h-6 text-center text-2xl font-bold;
 }
