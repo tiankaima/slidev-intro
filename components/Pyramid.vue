@@ -7,7 +7,6 @@ import { useTres } from '@tresjs/core';
 import type { Group, Material } from 'three';
 import { Color } from 'three';
 import { usePyramid } from '../composables/usePyramid';
-import { useKeybindings } from '../composables/useKeybindings';
 import Tetrahedron from './Tetrahedron.vue';
 import Octahedron from './Octahedron.vue';
 import { useSolver } from '../composables/useSolver.js';
@@ -65,15 +64,12 @@ onMounted(() => {
 		pyramid.doMove(
 			Math.random() > 0.7 ? section.toLocaleLowerCase() : section,
 			Math.random() > 0.5,
-			200
 		);
 	}
 	setTimeout(() => {
 		useSolver(pyramid, autoSolve);
 	}, 3000);
 });
-
-useKeybindings(pyramid.doMove, autoSolve);
 </script>
 
 <template>

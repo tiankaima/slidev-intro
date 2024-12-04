@@ -12,11 +12,11 @@ mdc: true
 colorSchema: dark
 ---
 
-# Introduction to Slidev
+# Introduction to Slidev {style="text-shadow: 0px 0px 4px black"}
 
 <div />
 
-<div op-80>
+<div op-80 style="text-shadow: 0px 0px 8px black">
 Presentation slides for developers
 </div>
 
@@ -28,7 +28,6 @@ Presentation slides for developers
 
 <!-- to preload the modules -->
 <Demo hidden />
-
 
 ---
 transition: fade-out
@@ -102,7 +101,7 @@ transition: slide-left
 
 # Graph?
 
-<div />
+Mermaid.js / PlantUML / Custom renderer
 
 <div grid grid-cols-2 gap-12>
 <div>
@@ -130,11 +129,15 @@ graph TB
 </div>
 
 ---
-clicks: 3
+clicks: 2
 transition: slide-left
 ---
 
 # Code? <span v-click="2"> Even editable! </span>
+
+<span v-if="$clicks < 1">It couldn't be simpler!</span>
+<span v-else-if="$clicks < 2">"Shiki Magic Move"!</span>
+<span v-else>"Monaco Editor"!</span>
 
 <div v-show="$clicks < 2">
 
@@ -168,7 +171,7 @@ int main() {
 
 <div v-show="$clicks >= 2">
 
-```ts {monaco}
+```ts {monaco}{height: 'auto'}
 import { ref, watchEffect } from 'vue'
 
 const a = ref(1)
@@ -190,7 +193,7 @@ transition: slide-left
 
 <!-- <iframe v-click fixed right-0 w-120 h-68 top-30  src="https://sli.dev" ></iframe> -->
 
-<iframe v-click fixed right-10 w-120 h-68 top-30 bottom-0  src="https://www.youtube.com/embed/dQw4w9WgXcQ?si=hCnWGH-S8ML-hjau" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+<iframe fixed right-10 w-120 h-68 top-30 bottom-0  src="https://www.youtube.com/embed/dQw4w9WgXcQ?si=hCnWGH-S8ML-hjau" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 
 ---
 transition: fade-out
@@ -332,7 +335,7 @@ transition: fade-out
 
 <div font-bold text-2xl class="font-[Consolas]" border="b dashed" w-min> https://sli.dev/new </div>
 
-<div float-right mt--16>
+<div float-right mt--20>
 
 优点：无需任何配置，只需要浏览器
 
@@ -352,7 +355,7 @@ transition: fade-out
 
 1. 安装 Node.js
 
-    - 打开 <a href="https://nodejs.org/" class="font-[Consolas] text-blue border-b ml-1"> https://nodejs.org/ </a>
+    - 打开 <span class="font-[Consolas] text-blue border-b ml-1 border-blue"> https://nodejs.org/ </span>
     - 点击下载按钮并安装
 
 2. 换源 (可选)
@@ -369,7 +372,7 @@ transition: fade-out
 
 # 创建 Slidev 项目
 
-- 打开终端
+- 打开终端 [（桌面/文件夹中右键，选择“在终端中打开”）]{.op-80.text-sm}
 
 - 创建 Slidev 项目
 
@@ -794,9 +797,9 @@ layout: intro
 # 第三页没有任何配置
 ```
 
-<div v-click rounded-xl border="2 yellow" v-drag="[61,145,221,80]" />
+<div v-click rounded-xl border="2 yellow" v-drag="[61,141,221,80]" />
 
-<div v-after text-yellow v-drag="[302,135,363,NaN]">
+<div v-after text-yellow v-drag="[302,132,363,NaN]">
 
 第一页前的配置是 `Headmatter`
 
@@ -804,9 +807,9 @@ layout: intro
 
 </div>
 
-<div v-click rounded-xl border="2 green" v-drag="[58,289,221,80]" />
+<div v-click rounded-xl border="2 green" v-drag="[58,285,221,80]" />
 
-<div v-after text-green v-drag="[299,279,363,NaN]">
+<div v-after text-green v-drag="[300,277,363,NaN]">
 
 其他每页前的配置是 `Frontmatter`
 
@@ -814,9 +817,9 @@ layout: intro
 
 </div>
 
-<div v-click rounded-xl border="2 red" v-drag="[59,428,223,44]" />
+<div v-click rounded-xl border="2 red" v-drag="[60,423,223,44]" />
 
-<div v-after text-red v-drag="[295,421,363,NaN]">
+<div v-after text-red v-drag="[297,415,363,NaN]">
 
 `Headmatter` 和 `Frontmatter` 都是可选的
 
@@ -832,10 +835,10 @@ layout: intro
 <div>
 
 ```md
-  行内公式：$1 + 1 = \textcircled{9}$
+  **行内公式**：$1 + 1 = \textcircled{9}$
 
 
-  多行公式：
+  **多行公式**：
   $$ {all|1|2}
   \begin{aligned}
   a x^2 + b x + c &= 0 \\
@@ -849,11 +852,11 @@ layout: intro
 <div>
 
 
-行内公式：$1 + 1 = \textcircled{9}$
+**行内公式**：$1 + 1 = \textcircled{9}$
 
 <div h-2 />
 
-多行公式：
+**多行公式**：
 $$ {all|1|2}
 \begin{aligned}
 a x^2 + b x + c &= 0 \\
@@ -1164,7 +1167,7 @@ transition: view-transition
 
 <div class="font-[Consolas]" mt-4> <a href="https://icones.js.org/">https://icones.js.org/</a> </div>
 
-<iframe src="https://icones.js.org/" h-120 mt-2 class="origin-left-top w-150% scale-67" />
+<iframe src="https://icones.js.org/" h-163 mt-2 class="origin-left-top w-200% scale-50" />
 
 ---
 dragPos:
@@ -1238,7 +1241,10 @@ layout: section
 
 <style>
 li p {
-  @apply mb-0 mt-1;
+  @apply mb-0 mt-0;
+}
+li {
+  @apply !leading-8.5;
 }
 </style>
 
@@ -1284,13 +1290,15 @@ npm run build
 npm run build --base /folder/
 ```
 
-生成的代码在 `dist` 目录下
+（生成的代码在 `dist` 目录下）
 
-或者，使用托管服务，解放双手
+<div h-4 />
+
+或者，使用托管服务，解放双手：
 
 - GitHub Pages / Netlify / Vercel
 
-Slidev 官网有指南，非常方便
+- Slidev 官网有指南，非常方便
 
 ---
 
@@ -1324,7 +1332,7 @@ Slidev 官网有指南，非常方便
 - 代理
 - 换源
 - PNPM
-- GitHub Codespace
+- GitHub Codespaces
 
 ---
 
@@ -1333,7 +1341,7 @@ Slidev 官网有指南，非常方便
 <div />
 
 - PPT 和 Slidev 的适用场景不同，有的时候 PPT 更合适
-- 适用 Slidev 时，先确定是追求效率还是质量
+- 使用 Slidev 时，先确定是追求效率还是质量
     - 追求效率：Slidev 里只需要写文本，就可以获得不错的排版
         - 写好了文章，需要做汇报的情况
     - 追求质量：编写 CSS 和 Vue，可以做出完美效果，但需要更多时间

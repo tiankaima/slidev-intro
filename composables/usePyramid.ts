@@ -546,7 +546,7 @@ export async function usePyramid(
 
 	const moveQueue = [];
 
-	function doMove(section: string, clockwise = true, duration = undefined) {
+	function doMove(section: string, clockwise = true, duration: number | undefined = undefined) {
 		moveQueue.push({ section, clockwise, duration });
 		if (isMoving.value) {
 			return;
