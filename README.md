@@ -4,7 +4,7 @@
 
 幻灯片源码在 [`./slides.md`](./slides.md)
 
-在线访问：https://kermanx.github.io/intro-slidev
+在线访问：https://kermanx.github.io/slidev-intro
 
 ## Credit
 
