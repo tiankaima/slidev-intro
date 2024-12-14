@@ -32,7 +32,7 @@ jobs:
         run: nci
 
       - name: Build
-        run: NODE_OPTIONS="--max-old-space-size=8192" nr build --base /${{github.event.repository.name}}/
+        run: NODE_OPTIONS="--max-old-space-size=8192" nr build --base "https://ftp.lug.ustc.edu.cn/%E6%B4%BB%E5%8A%A8/2024.12.04_Slidev_%E5%B0%8F%E8%81%9A/slides/"
 
       - name: Setup Pages
         uses: actions/configure-pages@v4
@@ -40,15 +40,3 @@ jobs:
       - uses: actions/upload-pages-artifact@v3
         with:
           path: dist
-
-  deploy:
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    needs: build
-    runs-on: ubuntu-latest
-    name: Deploy
-    steps:
-      - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v4
